@@ -66,6 +66,6 @@ module Notification
   end
 end
 
-unless Issue.included_modules.include? Notification::IssuePatch
+unless Issue.included_modules.include?(Notification::IssuePatch)
   Issue.send(:include, Notification::IssuePatch)
 end
