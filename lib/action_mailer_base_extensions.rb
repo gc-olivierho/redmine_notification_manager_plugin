@@ -10,6 +10,10 @@ module MailNotifications
       if (Thread.current[:is_issue_change] && !Thread.current[:send_notification_email])
         mail.perform_deliveries = false
         Rails.logger.info("Squelching notification: #{mail.subject}")
+        # Reset the notifications to true so that no other notification 
+        # is cancelled, now that the setting has been used (otherwise, would cancel 
+        # notifications of news, etc. for which the thread setting is not re-evaluated)
+        Thread.current[:send_notification_email] = true
       end
     end
 
